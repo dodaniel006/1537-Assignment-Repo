@@ -92,7 +92,7 @@ a {
     position: absolute;
 }
 
-#primaryimgtext div header {
+#primaryimgtext figcaption header {
     background-color: white;
     width: fit-content;
     font-size: 20px;
@@ -100,7 +100,7 @@ a {
     margin-bottom: 8px;
 }
 
-#primaryimgtext div span {
+#primaryimgtext figcaption span {
     width: fit-content;
     color: white;
     background-color: black;
@@ -293,17 +293,17 @@ hr {
         margin: -145px 0 0 0;
     }
 
-    #primaryimgtext div:nth-child(odd) {
+    #primaryimgtext figcaption:nth-child(odd) {
         display: none;
     }
 
-    #primaryimgtext div header {
+    #primaryimgtext figcaption header {
         font-size: 17px;
         margin-bottom: 4px;
         background-color: rgba(255, 255, 255, .85);
     }
 
-    #primaryimgtext div span {
+    #primaryimgtext figcaption span {
         font-size: 14px;
         background-color: rgba(0, 0, 0, .6);
     }
@@ -454,7 +454,7 @@ hr {
         margin: -250px 0 0 0;
     }
 
-    #primaryimgtext div:nth-child(odd) {
+    #primaryimgtext figcaption:nth-child(odd) {
         display: none;
     }
 
@@ -589,7 +589,7 @@ hr {
         display: none;
     }
 
-    #primaryimgtext div:nth-child(even) {
+    #primaryimgtext figcaption:nth-child(even) {
         display: none;
     }
 
