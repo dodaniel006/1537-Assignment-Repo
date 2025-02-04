@@ -92,7 +92,7 @@ a {
     position: absolute;
 }
 
-#primaryimgtext figcaption header {
+#primaryimgtext div header {
     background-color: white;
     width: fit-content;
     font-size: 20px;
@@ -100,7 +100,7 @@ a {
     margin-bottom: 8px;
 }
 
-#primaryimgtext figcaption span {
+#primaryimgtext div span {
     width: fit-content;
     color: white;
     background-color: black;
@@ -163,10 +163,6 @@ a {
 
 #newsletteremail {
     width: 140px;
-}
-
-#secondaryimg {
-    width: 100%;
 }
 
 #article {
@@ -293,17 +289,17 @@ hr {
         margin: -145px 0 0 0;
     }
 
-    #primaryimgtext figcaption:nth-child(odd) {
+    #primaryimgtext div:nth-child(odd) {
         display: none;
     }
 
-    #primaryimgtext figcaption header {
+    #primaryimgtext div header {
         font-size: 17px;
         margin-bottom: 4px;
         background-color: rgba(255, 255, 255, .85);
     }
 
-    #primaryimgtext figcaption span {
+    #primaryimgtext div span {
         font-size: 14px;
         background-color: rgba(0, 0, 0, .6);
     }
@@ -454,7 +450,7 @@ hr {
         margin: -250px 0 0 0;
     }
 
-    #primaryimgtext figcaption:nth-child(odd) {
+    #primaryimgtext div:nth-child(odd) {
         display: none;
     }
 
@@ -589,7 +585,7 @@ hr {
         display: none;
     }
 
-    #primaryimgtext figcaption:nth-child(even) {
+    #primaryimgtext div:nth-child(even) {
         display: none;
     }
 
