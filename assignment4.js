@@ -11,7 +11,7 @@ app.use("/img", express.static("./public/img"));
 app.get("/", function (req, res) {
     //console.log(process.env);
     // retrieve and send an HTML document from the file system
-    let doc = fs.readFileSync("./app/html/main.html", "utf8");
+    let doc = fs.readFileSync("./app/html/index.html", "utf8");
     res.send(doc);
 });
 
