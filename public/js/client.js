@@ -4,7 +4,6 @@ function ajaxGET(url, callback) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            //console.log('responseText:' + xhr.responseText);
             callback(this.responseText);
         } else {
             console.log(this.status);
@@ -14,25 +13,32 @@ function ajaxGET(url, callback) {
     xhr.send();
 }
 
-document.querySelector("#weekdaysHTML").addEventListener("click", function (e) {
-    ajaxGET("/weekdays?format=json", function (data) {
+document.getElementById("HTMLButton").addEventListener("click", function (e) {
+    console.log("HTML");
+    ajaxGET("/toptenarticles?format=html", function (data) {
         console.log("Hello there");
-        // since it's HTML, let's drop it right in
-        document.getElementById("weekdaysText").innerHTML = data;
+        document.getElementById("HTMLDATA").innerHTML = data;
     });
 });
 
-document.querySelector("#weekdaysJSON").addEventListener("click", function (e) {
-    ajaxGET("/weekdays?format=json", function (data) {
-        console.log("Before parsing", data);
-        // this call is JSON so we have to parse it:
+document.getElementById("JSONButton").addEventListener("click", function (e) {
+    console.log("JSON");
+    ajaxGET("/toptenarticles?format=json", function (data) {
+        console.log("Raw Data", data);
         let parsedData = JSON.parse(data);
-        console.log("After parsing", parsedData);
-        let str = "<ol>"
+        console.log("Parsed Data", parsedData);
+        let str = "<table><tr><th>Title</th><th>Author</th><th>Subject</th><th>Date</th><th>Category</th></tr>";
         for (let i = 0; i < parsedData.length; i++) {
-            str += "<li>" + parsedData[i] + "</li>";
+            str += "<tr>";
+            str += "<td>" + parsedData[i].title + "</td>";
+            str += "<td>" + parsedData[i].author + "</td>";
+            str += "<td>" + parsedData[i].subject + "</td>";
+            str += "<td>" + parsedData[i].date + "</td>";
+            str += "<td>" + parsedData[i].category + "</td>";
+            str += "</tr>";
         }
-        str += "</ol>";
-        document.getElementById("weekdaysJSON").innerHTML = str;
+        str += "</table>";
+        console.log(str);
+        document.getElementById("JSONDATA").innerHTML = str;
     });
 });

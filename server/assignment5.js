@@ -21,18 +21,18 @@ app.get("/", function (req, res) {
     res.send(doc);
 });
 
-app.get("/weekdays", function (req, res) {
+app.get("/toptenarticles", function (req, res) {
     let formatOfResponse = req.query["format"];
     // e.g.,: http://localhost:8000/weekdays?format=html
     // e.g.,: http://localhost:8000/weekdays?format=json
     if (formatOfResponse == "html") {
         // MIME type
         res.setHeader("Content-Type", "text/html");
-        res.send(fs.readFileSync("../app/data/lists.js", "utf8"));
+        res.send(fs.readFileSync("../app/data/toparticles.html", "utf8"));
     } else if (formatOfResponse == "json") {
         // MIME type
         res.setHeader("Content-Type", "application/json");
-        res.send(fs.readFileSync("../app/data/lists.json", "utf8"));
+        res.send(fs.readFileSync("../app/data/toparticles.js", "utf8"));
     } else {
         // just send JSON message
         res.send({ status: "fail", msg: "Wrong format!" });
