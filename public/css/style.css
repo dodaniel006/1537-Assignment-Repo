@@ -18,6 +18,16 @@ a {
     color: #2B9195;
 }
 
+table {
+    border-collapse: collapse;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
 .icon {
     width: 30px;
     aspect-ratio: 1 / 1;
@@ -526,7 +536,7 @@ hr {
 
     #container {
         grid-template-columns: 260px auto;
-        grid-template-rows: 580px 500px 80px;
+        grid-template-rows: 580px 500px 1000px 80px;
     }
 
     #sidebar {
@@ -648,9 +658,15 @@ hr {
         overflow: hidden;
     }
 
+    #list {
+        grid-row: 3;
+        grid-column: 2;
+        background-color: aliceblue;
+    }
+
     footer {
         grid-column: 1 / span 2;
-        grid-row: 3;
+        grid-row: 4;
         grid-template-rows: 20px 60px;
     }
 
