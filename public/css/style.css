@@ -30,7 +30,7 @@ td {
 
 .icon {
     width: 30px;
-    aspect-ratio: 1 / 1;
+    /* aspect-ratio: 1 / 1; */
 }
 
 #container {
@@ -77,7 +77,7 @@ td {
 #sidebarbody {
     width: 60%;
     margin: 5% auto;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 #primary {
@@ -227,6 +227,7 @@ hr {
 
 #sociallinks .icon {
     padding: 1% 10px;
+    width: 60px;
 }
 
 @media only screen and (max-width: 700px) {
@@ -400,7 +401,7 @@ hr {
 @media only screen and (max-width : 1280px) and (min-width : 701px) {
 
     #container {
-        grid-template-rows: 130px 490px 500px 80px;
+        grid-template-rows: 130px 490px 500px 1000px 80px;
     }
 
     #logo {
@@ -511,18 +512,24 @@ hr {
 
     .articleheader {
         font-size: 16px;
-        max-height: 80px;
+        max-height: 6em;
         width: 100%;
         overflow: hidden;
     }
 
     .articlebody {
-        max-height: 200px;
+        max-height: 210px;
         overflow: hidden;
     }
 
-    footer {
+    #list {
         grid-row: 4;
+        text-align: center;
+        background-color: aliceblue;
+    }
+
+    footer {
+        grid-row: 5;
         grid-template-rows: 20px 60px;
     }
 
@@ -566,10 +573,6 @@ hr {
 
     #sidebarlinks br {
         display: none;
-    }
-
-    #sidebarbody {
-        font-size: 10px;
     }
 
     #primary {
@@ -654,7 +657,7 @@ hr {
     }
 
     .articlebody {
-        max-height: 200px;
+        max-height: 210px;
         overflow: hidden;
     }
 
