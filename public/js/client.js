@@ -6,7 +6,7 @@ function ajaxGET(url, callback) {
         } else {
             console.log(this.status);
         }
-    }
+    };
     xhr.open("GET", url);
     xhr.send();
 }
