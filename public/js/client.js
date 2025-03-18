@@ -1,5 +1,3 @@
-console.log("client.js loaded.");
-
 function ajaxGET(url, callback) {
     const xhr = new XMLHttpRequest();
     xhr.onload = function () {
