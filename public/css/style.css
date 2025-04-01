@@ -150,7 +150,6 @@ td {
 #primarynewsletter {
     grid-row: 3;
     display: flex;
-    gap: 2%;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -160,7 +159,7 @@ td {
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 440px;
+    width: 850px;
     font-size: 14px;
     text-align: justify;
 }
@@ -172,7 +171,7 @@ td {
 }
 
 #newsletteremail {
-    width: 140px;
+    width: 250px;
 }
 
 #article {
@@ -543,7 +542,7 @@ hr {
 
     #container {
         grid-template-columns: 260px auto;
-        grid-template-rows: 580px 500px 1000px 80px;
+        grid-template-rows: 680px 500px 1000px 80px;
     }
 
     #sidebar {
@@ -578,7 +577,7 @@ hr {
     #primary {
         grid-column: 2;
         grid-row: 1;
-        grid-template-rows: 400px 40px 100px;
+        grid-template-rows: 500px 40px 100px;
         padding-top: 40px;
     }
 
@@ -587,7 +586,8 @@ hr {
     }
 
     .primaryimg {
-        max-width: 720px;
+        width: 1400px;
+        height: 500px;
     }
 
     #primaryimgtext {
@@ -616,7 +616,7 @@ hr {
     }
 
     #primarynav div {
-        width: 180px;
+        width: 280px;
     }
 
     #primarynav a {
@@ -631,7 +631,7 @@ hr {
     }
 
     .articleitems {
-        width: 230px;
+        width: 300px;
         height: 100%;
         flex-direction: column;
     }
@@ -651,13 +651,13 @@ hr {
 
     .articleheader {
         font-size: 16px;
-        max-height: 80px;
+        height: 80px;
         width: 100%;
         overflow: hidden;
     }
 
     .articlebody {
-        max-height: 210px;
+        height: 210px;
         overflow: hidden;
     }
 
