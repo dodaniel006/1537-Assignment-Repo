@@ -7,17 +7,17 @@ var con = mysql.createConnection({
     database: "assignment6"
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
 
     // Create database
-    con.query("CREATE DATABASE IF NOT EXISTS assignment6", function(err, result) {
+    con.query("CREATE DATABASE IF NOT EXISTS assignment6", function (err, result) {
         if (err) throw err;
     });
 
     // Use the database
-    con.query("USE assignment6", function(err, result) {
+    con.query("USE assignment6", function (err, result) {
         if (err) throw err;
         console.log("Using database assignment6");
     });
@@ -33,37 +33,37 @@ con.connect(function(err) {
             password VARCHAR(100) NOT NULL
         )
     `;
-    con.query(createUserTable, function(err, result) {
+    con.query(createUserTable, function (err, result) {
         if (err) throw err;
         console.log("User table created or already exists");
     });
 
     // Insert a user record
-    const insertUser = `
-        INSERT INTO A01451718_user (username, first_name, last_name, email, password)
-        VALUES ('DDo', 'Daniel', 'Do', 'ddo19@my.bcit.ca', 'securepassword')
-    `;
-    con.query(insertUser, function(err, result) {
-        if (err) throw err;
-        console.log("User record inserted");
-    });
+    // const insertUser = `
+    //     INSERT INTO A01451718_user (username, first_name, last_name, email, password)
+    //     VALUES ('DDo', 'Daniel', 'Do', 'ddo19@my.bcit.ca', 'securepassword')
+    // `;
+    // con.query(insertUser, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("User record inserted");
+    // });
 
-    // Create user timeline table
-    const createTimelineTable = `
-        CREATE TABLE IF NOT EXISTS A01451718_user_timeline (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            user_id INT NOT NULL,
-            post_date DATE NOT NULL,
-            post_text TEXT NOT NULL,
-            post_time TIME NOT NULL,
-            views INT NOT NULL,
-            FOREIGN KEY (user_id) REFERENCES A01451718_user(id)
-        )
-    `;
-    con.query(createTimelineTable, function(err, result) {
-        if (err) throw err;
-        console.log("User timeline table created or already exists");
-    });
+    // // Create user timeline table
+    // const createTimelineTable = `
+    //     CREATE TABLE IF NOT EXISTS A01451718_user_timeline (
+    //         id INT AUTO_INCREMENT PRIMARY KEY,
+    //         user_id INT NOT NULL,
+    //         post_date DATE NOT NULL,
+    //         post_text TEXT NOT NULL,
+    //         post_time TIME NOT NULL,
+    //         views INT NOT NULL,
+    //         FOREIGN KEY (user_id) REFERENCES A01451718_user(id)
+    //     )
+    // `;
+    // con.query(createTimelineTable, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("User timeline table created or already exists");
+    // });
 
     // Insert posts for the user
     const insertPosts = `
@@ -75,8 +75,25 @@ con.connect(function(err) {
         (1, '2023-01-04', 'Learning about database normalization.', '13:00:00', 250),
         (1, '2023-01-05', 'Implementing CRUD operations in Node.js.', '14:00:00', 300)
     `;
-    con.query(insertPosts, function(err, result) {
+    con.query(insertPosts, function (err, result) {
         if (err) throw err;
         console.log("Posts inserted into user timeline table");
     });
+
+    function loginUser(username, password) {
+        console.log("hello");
+        const sql = `SELECT * FROM A01451718_user WHERE username = ` + username + ` AND password = ` + password;
+        con.query(sql, [username, password], function (err, result) {
+            if (err) throw err;
+            console.log(result);
+            if (result.length > 0) {
+                return true; // User found
+            } else {
+                console.log("Invalid username or password");
+                return false;
+            }
+        });
+    }
+    // Export the loginUser function
+    module.exports = { loginUser };
 });

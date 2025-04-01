@@ -19,7 +19,7 @@ document.getElementById("HTMLButton").addEventListener("click", function (e) {
 });
 
 document.getElementById("LoginButton").addEventListener("click", function () {
-    window.location.href = "/login";
+    window.location.href = "/loginHTML";
 });
 
 document.getElementById("JSONButton").addEventListener("click", function (e) {
