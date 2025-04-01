@@ -5,8 +5,9 @@ app.use(express.json()); // For parsing application/json
 app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded data
 const fs = require("fs");
 const { JSDOM } = require('jsdom');
-const { loginUser } = require('./mySQL'); // Adjust the path if necessary
 const mysql = require('mysql');
+let email;
+let password;
 
 app.use("/js", express.static("../public/js"));
 app.use("/css", express.static("../public/css"));
@@ -34,6 +35,32 @@ con.connect(function (err) {
     if (err) throw err;
     console.log("Connected!");
 
+    // Create database
+    con.query("CREATE DATABASE IF NOT EXISTS assignment6", function (err, result) {
+        if (err) throw err;
+    });
+
+    // Use the database
+    con.query("USE assignment6", function (err, result) {
+        if (err) throw err;
+        console.log("Using database assignment6");
+    });
+
+    // Create user table
+    const createUserTable = `
+        CREATE TABLE IF NOT EXISTS A01451718_user (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            username VARCHAR(50) NOT NULL,
+            first_name VARCHAR(50) NOT NULL,
+            last_name VARCHAR(50) NOT NULL,
+            email VARCHAR(100) NOT NULL,
+            password VARCHAR(100) NOT NULL
+        )
+    `;
+    con.query(createUserTable, function (err, result) {
+        if (err) throw err;
+        console.log("User table created or already exists");
+    });
 
     app.get("/", function (req, res) {
 
@@ -68,17 +95,29 @@ con.connect(function (err) {
         }
     });
 
+    app.get("/getPosts", function (req, res) {
+        const sql = 'SELECT id FROM A01451718_user WHERE email = ? AND password = ?'
+        con.query(sql, [email, password], function (err, result) {
+            const sql2 = 'SELECT * FROM A01451718_user_timeline WHERE user_id = ?'
+            con.query(sql2, [result[0].id], function (err, result2) {
+                console.log(result2);
+                res.send({status: "success", data: result2});
+            });
+            
+        });
+
+    });
+
     // Notice that this is a "POST"
     app.post("/login", function (req, res) {
         res.setHeader("Content-Type", "application/json");
 
         console.log("What was sent", req.body.email, req.body.password);
+        email = req.body.email;
+        password = req.body.password;
 
-        // check to see if the user name matches
-        /*
-         * IMPORTANT: THIS IS WHERE YOU WOULD PERFORM A CHECK IN THE DB INSTEAD OF
-         *            HARD CODING THE VALUES HERE !!!
-         */
+        // check to see if the user name matches in db
+
         const sql = `SELECT * FROM A01451718_user WHERE email = ? AND password = ?`;
         con.query(sql, [req.body.email, req.body.password], function (err, result) {
             if (err) throw err;
@@ -92,13 +131,12 @@ con.connect(function (err) {
                 req.session.save(function (err) {
                     // session saved. For analytics, we could record this in a DB
                 });
-                // all we are doing as a server is telling the client that they
-                // are logged in, it is up to them to switch to the profile page
+                // Tells client side js that login was success
                 res.send({ status: "success", msg: "Logged in." });
+
+
             } else {
-                // server couldn't find that, so use AJAX response and inform
-                // the user. when we get success, we will do a complete page
-                // change. Ask why we would do this in lecture/lab :)
+                // Returns a fail if the user could not be logged in.
                 res.send({ status: "fail", msg: "User account not found." });
             }
         });

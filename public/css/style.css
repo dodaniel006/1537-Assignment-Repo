@@ -150,6 +150,7 @@ td {
 #primarynewsletter {
     grid-row: 3;
     display: flex;
+    gap: 10px;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -159,7 +160,7 @@ td {
     display: flex;
     align-items: center;
     gap: 10px;
-    width: 850px;
+    width: 500px;
     font-size: 14px;
     text-align: justify;
 }
@@ -586,7 +587,7 @@ hr {
     }
 
     .primaryimg {
-        width: 1400px;
+        width: 1000px;
         height: 500px;
     }
 
@@ -603,7 +604,7 @@ hr {
     }
 
     #primaryimgcredit1 {
-        margin: -50px 0 0 1235px;
+        margin: -50px 0 0 835px;
     }
 
     #primaryimgcredit2 {
@@ -616,7 +617,7 @@ hr {
     }
 
     #primarynav div {
-        width: 280px;
+        width: 230px;
     }
 
     #primarynav a {
@@ -631,7 +632,7 @@ hr {
     }
 
     .articleitems {
-        width: 300px;
+        width: 240px;
         height: 100%;
         flex-direction: column;
     }

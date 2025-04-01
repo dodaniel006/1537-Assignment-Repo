@@ -51,6 +51,7 @@ document.querySelector("#submit").addEventListener("click", function (e) {
             console.log(dataParsed);
             if (dataParsed.status == "fail") {
                 console.log("fail", dataParsed.msg);
+                alert("Incorrect Email or Password! Try again.");
             } else {
                 window.location.replace("/");
             }
