@@ -18,10 +18,6 @@ document.getElementById("HTMLButton").addEventListener("click", function (e) {
     });
 });
 
-document.getElementById("LoginButton").addEventListener("click", function () {
-    window.location.href = "/loginHTML";
-});
-
 document.getElementById("JSONButton").addEventListener("click", function (e) {
     console.log("JSON");
     ajaxGET("/toptenarticles?format=json", function (data) {

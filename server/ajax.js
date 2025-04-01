@@ -2,6 +2,7 @@ const express = require("express");
 const session = require("express-session");
 const app = express();
 app.use(express.json()); // For parsing application/json
+app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded data
 const fs = require("fs");
 const { JSDOM } = require('jsdom');
 const { loginUser } = require('./mySQL'); // Adjust the path if necessary
@@ -22,9 +23,7 @@ app.use(session(
     })
 );
 
-
-
-var con = mysql.createConnection({
+let con = mysql.createConnection({
     host: "localhost",
     user: "Daniel",
     password: "password123",
@@ -37,8 +36,18 @@ con.connect(function (err) {
 
 
     app.get("/", function (req, res) {
-        let doc = fs.readFileSync("../app/html/index.html", "utf8");
-        res.send(doc);
+
+        if (req.session.loggedIn) {
+            let doc = fs.readFileSync("../app/html/index.html", "utf8");
+
+            res.set("Server", "Wazubi Engine");
+            res.set("X-Powered-By", "Wazubi");
+            res.send(doc);
+
+        } else {
+            res.redirect("/loginHTML");
+
+        }
     });
 
     app.get("/loginHTML", function (req, res) {
@@ -70,7 +79,6 @@ con.connect(function (err) {
          * IMPORTANT: THIS IS WHERE YOU WOULD PERFORM A CHECK IN THE DB INSTEAD OF
          *            HARD CODING THE VALUES HERE !!!
          */
-        console.log("hello");
         const sql = `SELECT * FROM A01451718_user WHERE email = ? AND password = ?`;
         con.query(sql, [req.body.email, req.body.password], function (err, result) {
             if (err) throw err;
@@ -94,6 +102,19 @@ con.connect(function (err) {
                 res.send({ status: "fail", msg: "User account not found." });
             }
         });
+    });
+
+    app.post("/logout", function (req, res) {
+        console.log("Hello");
+        if (req.session) {
+            req.session.destroy(function (error) {
+                if (error) {
+                    res.status(400).send("Unable to log out");
+                } else {
+                    res.redirect("/");
+                }
+            });
+        }
     });
 
     let port = 8000;

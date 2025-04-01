@@ -52,7 +52,7 @@ document.querySelector("#submit").addEventListener("click", function (e) {
             if (dataParsed.status == "fail") {
                 console.log("fail", dataParsed.msg);
             } else {
-                window.location.replace("/profile");
+                window.location.replace("/");
             }
         }
 

@@ -66,19 +66,19 @@ con.connect(function (err) {
     // });
 
     // Insert posts for the user
-    const insertPosts = `
-        INSERT INTO A01451718_user_timeline (user_id, post_date, post_text, post_time, views)
-        VALUES 
-        (1, '2023-01-01', 'Today, we learned how to connect Node.js to a MySQL database.', '10:00:00', 100),
-        (1, '2023-01-02', 'Exploring the basics of SQL queries.', '11:00:00', 150),
-        (1, '2023-01-03', 'Understanding primary and foreign keys.', '12:00:00', 200),
-        (1, '2023-01-04', 'Learning about database normalization.', '13:00:00', 250),
-        (1, '2023-01-05', 'Implementing CRUD operations in Node.js.', '14:00:00', 300)
-    `;
-    con.query(insertPosts, function (err, result) {
-        if (err) throw err;
-        console.log("Posts inserted into user timeline table");
-    });
+    // const insertPosts = `
+    //     INSERT INTO A01451718_user_timeline (user_id, post_date, post_text, post_time, views)
+    //     VALUES 
+    //     (1, '2023-01-01', 'Today, we learned how to connect Node.js to a MySQL database.', '10:00:00', 100),
+    //     (1, '2023-01-02', 'Exploring the basics of SQL queries.', '11:00:00', 150),
+    //     (1, '2023-01-03', 'Understanding primary and foreign keys.', '12:00:00', 200),
+    //     (1, '2023-01-04', 'Learning about database normalization.', '13:00:00', 250),
+    //     (1, '2023-01-05', 'Implementing CRUD operations in Node.js.', '14:00:00', 300)
+    // `;
+    // con.query(insertPosts, function (err, result) {
+    //     if (err) throw err;
+    //     console.log("Posts inserted into user timeline table");
+    // });
 
     function loginUser(username, password) {
         console.log("hello");
