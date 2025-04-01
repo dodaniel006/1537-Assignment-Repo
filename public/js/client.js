@@ -12,11 +12,14 @@ function ajaxGET(url, callback) {
 }
 
 document.getElementById("HTMLButton").addEventListener("click", function (e) {
-    console.log("HTML");
     ajaxGET("/toptenarticles?format=html", function (data) {
         console.log("Hello there");
         document.getElementById("HTMLDATA").innerHTML = data;
     });
+});
+
+document.getElementById("LoginButton").addEventListener("click", function () {
+    window.location.href = "/login";
 });
 
 document.getElementById("JSONButton").addEventListener("click", function (e) {

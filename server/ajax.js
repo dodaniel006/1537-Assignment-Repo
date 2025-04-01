@@ -10,7 +10,11 @@ app.use("/fonts", express.static("../public/fonts"));
 
 app.get("/", function (req, res) {
     let doc = fs.readFileSync("../app/html/index.html", "utf8");
+    res.send(doc);
+});
 
+app.get("/login", function (req, res) {
+    let doc = fs.readFileSync("../app/html/login.html", "utf8");
     res.send(doc);
 });
 

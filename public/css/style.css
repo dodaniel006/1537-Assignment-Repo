@@ -13,7 +13,7 @@ body {
     background-color: #E2F8FA;
 }
 
-a {
+a, #primarynav a{
     text-decoration: none;
     color: #2B9195;
 }
