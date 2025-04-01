@@ -1,20 +1,20 @@
 console.log("login.js loaded");
 
-function ajaxGET(url, callback) {
+// function ajaxGET(url, callback) {
 
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            //console.log('responseText:' + xhr.responseText);
-            callback(this.responseText);
+//     const xhr = new XMLHttpRequest();
+//     xhr.onload = function () {
+//         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+//             //console.log('responseText:' + xhr.responseText);
+//             callback(this.responseText);
 
-        } else {
-            console.log(this.status);
-        }
-    }
-    xhr.open("GET", url);
-    xhr.send();
-}
+//         } else {
+//             console.log(this.status);
+//         }
+//     }
+//     xhr.open("GET", url);
+//     xhr.send();
+// }
 
 function ajaxPOST(url, callback, data) {
 

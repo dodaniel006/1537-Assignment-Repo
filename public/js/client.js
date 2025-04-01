@@ -18,15 +18,27 @@ document.getElementById("HTMLButton").addEventListener("click", function (e) {
     });
 });
 
-
-// POST TO THE SERVER
-document.getElementById("TEST").addEventListener("click", function (e) {
-    e.preventDefault();
-
-});
-
 document.getElementById("JSONButton").addEventListener("click", function (e) {
     console.log("JSON");
+    ajaxGET("/getPosts", function (result) {
+
+        console.log("Cookies " + result);
+        console.log(JSON.parse(result));
+        let parsedData = JSON.parse(result);
+        let str = "<table><tr><th>Date</th><th>Text</th><th>Post Time</th><th>View Count</th></tr>";
+        for (let i = 0; i < parsedData.data.length; i++) {
+            str += "<tr>";
+            str += "<td>" + parsedData.data[i].post_date + "</td>";
+            str += "<td>" + parsedData.data[i].post_text + "</td>";
+            str += "<td>" + parsedData.data[i].post_time + "</td>";
+            str += "<td>" + parsedData.data[i].views + "</td>";
+            str += "</tr>";
+        }
+        str += "</table>";
+        console.log(str);
+        document.getElementById("JSONDATA").innerHTML = str;
+    });
+
     // ajaxGET("/toptenarticles?format=json", function (data) {
     //     console.log("Raw Data", data);
     //     let parsedData = JSON.parse(data);
@@ -45,23 +57,4 @@ document.getElementById("JSONButton").addEventListener("click", function (e) {
     //     console.log(str);
     //     document.getElementById("JSONDATA").innerHTML = str;
     // });
-
-    ajaxGET("/getPosts", function (result) {
-
-        console.log("Cookies " + result);
-        console.log(JSON.parse(result));
-        let parsedData = JSON.parse(result);
-        let str = "<table><tr><th>Date</th><th>Text</th><th>Post Time</th><th>View Count</th></tr>";
-        for (let i = 0; i < parsedData.data.length; i++) {
-            str += "<tr>";
-            str += "<td>" + parsedData.data[i].post_date + "</td>";
-            str += "<td>" + parsedData.data[i].post_text + "</td>";
-            str += "<td>" + parsedData.data[i].post_time + "</td>";
-            str += "<td>" + parsedData.data[i].views + "</td>";
-            str += "</tr>";
-        }
-            str += "</table>";
-            console.log(str);
-            document.getElementById("JSONDATA").innerHTML = str;
-    });
 });

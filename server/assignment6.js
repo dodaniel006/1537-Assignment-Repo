@@ -4,10 +4,7 @@ const app = express();
 app.use(express.json()); // For parsing application/json
 app.use(express.urlencoded({ extended: true })); // For parsing URL-encoded data
 const fs = require("fs");
-const { JSDOM } = require('jsdom');
 const mysql = require('mysql');
-let email;
-let password;
 
 app.use("/js", express.static("../public/js"));
 app.use("/css", express.static("../public/css"));
@@ -16,7 +13,7 @@ app.use("/fonts", express.static("../public/fonts"));
 
 app.use(session(
     {
-        secret: "extra text that no one will guess",
+        secret: "qeokgwepkgor",
         name: "wazaSessionID",
         resave: false,
         // create a unique identifier for that client
@@ -63,14 +60,11 @@ con.connect(function (err) {
     });
 
     app.get("/", function (req, res) {
-
         if (req.session.loggedIn) {
             let doc = fs.readFileSync("../app/html/index.html", "utf8");
-
             res.set("Server", "Wazubi Engine");
             res.set("X-Powered-By", "Wazubi");
             res.send(doc);
-
         } else {
             res.redirect("/loginHTML");
 
@@ -101,33 +95,32 @@ con.connect(function (err) {
             const sql2 = 'SELECT * FROM A01451718_user_timeline WHERE user_id = ?'
             con.query(sql2, [result[0].id], function (err, result2) {
                 console.log(result2);
-                res.send({status: "success", data: result2});
+                res.send({ status: "success", data: result2 });
             });
-            
+
         });
 
     });
 
+    let email;
+    let password;
     // Notice that this is a "POST"
     app.post("/login", function (req, res) {
         res.setHeader("Content-Type", "application/json");
-
-        console.log("What was sent", req.body.email, req.body.password);
         email = req.body.email;
         password = req.body.password;
 
         // check to see if the user name matches in db
-
         const sql = `SELECT * FROM A01451718_user WHERE email = ? AND password = ?`;
-        con.query(sql, [req.body.email, req.body.password], function (err, result) {
+        con.query(sql, [email, password], function (err, result) {
             if (err) throw err;
             console.log(result);
             if (result.length > 0) {
                 console.log("User found", result[0].email, result[0].password);
                 // user authenticated, create a session
                 req.session.loggedIn = true;
-                req.session.email = req.body.email;
-                req.session.name = req.body.password;
+                req.session.email = email;
+                req.session.name = password;
                 req.session.save(function (err) {
                     // session saved. For analytics, we could record this in a DB
                 });
